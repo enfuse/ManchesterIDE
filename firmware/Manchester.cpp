@@ -264,25 +264,12 @@ uint8_t* Manchester::encodeMessage(uint8_t id, uint16_t data)
 {
   uint8_t chsum = (id ^ (uint8_t)(data >> 8) ^ (uint8_t)(data & 0b11111111) ^ 0b11101101);
 
-  // for Particle devices, we can use a 32-bit unsigned int to store the 4 bytes of data? start with uint8_t first for best compatibility w/Arduino
+  // TODO for Particle devices, we can use a 32-bit unsigned int to store the 4 bytes of data instead?
   uint8_t *byteArray = new uint8_t[4];
   byteArray[0] = id;
   byteArray[1] = chsum;
   byteArray[2] = (uint8_t)(data >> 8);
   byteArray[3] = (uint8_t)(data & 0b11111111);
-
-  // uint8_t m[4] = { id, chsum, (uint8_t)(data >> 8), (uint8_t)(data & 0b11111111) };
-
-  Serial.println("### encode:");
-
-  Serial.print("ID: ");
-  Serial.println(byteArray[0],BIN);
-  Serial.print("CS: ");
-  Serial.println(byteArray[1],BIN);
-  Serial.print("D1: ");
-  Serial.println(byteArray[2],BIN);
-  Serial.print("D2: ");
-  Serial.println(byteArray[3],BIN);
 
   return byteArray;
 }
