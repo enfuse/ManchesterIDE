@@ -25,7 +25,7 @@
 uint8_t buffer[BUFFER_SIZE];    // buffer to store data for processing
 
 uint8_t moo = 1;
-uint8_t data;
+uint16_t data;
 uint8_t id;
 
 void setup() {

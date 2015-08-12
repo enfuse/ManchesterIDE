@@ -35,7 +35,7 @@ void setup() {
 void loop() {
   // SENDER_ID can be ID of the sender if you have multiple transmitters so receiver knows who sent it
   // OR it can be receiver ID if you have multiple receivers so receiver knows it's for him
-  // OR it can by just any arbitrary 4 bit number
+  // OR it can by just any arbitrary 8 bit number
 
   man.transmitArray(4,man.encodeMessage(SENDER_ID, transmit_data));
   transmit_data++;

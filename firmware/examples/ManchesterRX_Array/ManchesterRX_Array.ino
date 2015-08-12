@@ -21,6 +21,7 @@
 #define LED_PIN D7	//pin for blinking LED
 
 uint8_t moo = 1;
+
 #define BUFFER_SIZE 10
 uint8_t buffer[BUFFER_SIZE];
 
