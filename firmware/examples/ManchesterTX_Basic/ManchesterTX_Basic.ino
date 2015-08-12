@@ -1,10 +1,9 @@
 /*
-
   Manchester Transmitter example
-  
-  In this example transmitter will send one 16 bit number per transmittion
 
-  try different speeds using this constants, your maximum possible speed will 
+  In this example transmitter will send one 16 bit number per transmission
+
+  try different speeds using this constants, your maximum possible speed will
   depend on various factors like transmitter type, distance, microcontroller speed, ...
 
   MAN_300 0
@@ -15,8 +14,6 @@
   MAN_9600 5
   MAN_19200 6
   MAN_38400 7
-
-
 */
 #include "Manchester/Manchester.h"
 
@@ -29,7 +26,7 @@ uint16_t transmit_data = 0;
 void setup() {
   pinMode(LED_PIN, OUTPUT);
   digitalWrite(LED_PIN, moo);
-  man.workAround1MhzTinyCore(); //add this in order for transmitter to work with 1Mhz Attiny85/84
+  //man.workAround1MhzTinyCore(); //add this in order for transmitter to work with 1Mhz Attiny85/84
   man.setupTransmit(TX_PIN, MAN_1200);
 }
 

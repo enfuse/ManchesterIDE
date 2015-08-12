@@ -1,7 +1,7 @@
 {
-	"name": "Manchester",
-	"author": "Paul Kourany",
-	"version": "1.0.1",
-	"license": "Unspecified",
-	"description": "Manchester library for 315/433MHz radios "
+	"name": "Manchester-ExpandedPayload",
+	"author": "Chuan Khoo",
+	"version": "1.0.0",
+	"license": "MIT",
+	"description": "Expanded-payload Manchester library for 315/433MHz radios"
 }
