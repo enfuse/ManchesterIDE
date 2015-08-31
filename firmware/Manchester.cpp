@@ -201,30 +201,6 @@ void Manchester::sendOne(void)
 //TODO use repairing codes perhabs?
 //http://en.wikipedia.org/wiki/Hamming_code
 
-
-// DECODE REWRITE:
-
-// /*
-//     format of the message including checksum and ID
-//
-//     [0][1][2][3][4][5][6][7][8][9][a][b][c][d][e][f]
-//     [    ID    ][ checksum ][         data         ]
-//                   checksum = ID xor data[7:4] xor data[3:0] xor 0b0011
-//
-// */
-//
-// //decode 8 bit payload and 4 bit ID from the message, return true if checksum is correct, otherwise false
-// uint8_t Manchester::decodeMessage(uint16_t m, uint8_t &id, uint8_t &data)
-// {
-//   //extract components
-//   data = (m & 0xFF);
-//   id = (m >> 12);
-//   uint8_t ch = (m >> 8) & 0b1111; //checksum received
-//   //calculate checksum
-//   uint8_t ech = (id ^ data ^ (data >> 4) ^ 0b0011) & 0b1111; //checksum expected
-//   return ch == ech;
-// }
-
 //updated: decode 16 bit payload and 8 bit ID from the message, return true if checksum is correct, otherwise false
 boolean Manchester::decodeMessage(uint8_t* arr, uint8_t &id, uint16_t &data)
 {
@@ -237,12 +213,16 @@ boolean Manchester::decodeMessage(uint8_t* arr, uint8_t &id, uint16_t &data)
       total data length: 4 bytes
   */
 
+  #ifndef XOR_CHECKSUM
+      #define XOR_CHECKSUM 0b11101101
+  #endif
+
   id = arr[0];
   data = (uint16_t)( arr[2] << 8 | arr[3]);
   uint8_t chsum = arr[1]; //checksum received
 
   //calculate checksum
-  uint8_t ech = (id ^ (uint8_t)(arr[2]) ^ (uint8_t)(arr[3]) ^ 0b11101101);
+  uint8_t ech = (id ^ (uint8_t)(arr[2]) ^ (uint8_t)(arr[3]) ^ XOR_CHECKSUM);
 
   // uint8_t ech = (id ^ data ^ (data >> 4) ^ 0b0011) & 0b1111; //checksum expected
   return chsum == ech;
