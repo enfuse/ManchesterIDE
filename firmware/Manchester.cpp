@@ -240,18 +240,23 @@ boolean Manchester::decodeMessage(uint8_t* arr, uint8_t &id, uint16_t &data)
 // }
 
 //updated: encodes 16 bit payload, 8 bit ID and 8 bit checksum, total of 32 bits (4 bytes)
-uint8_t* Manchester::encodeMessage(uint8_t id, uint16_t data)
+//updated: use word datatype to handle 4-byte messages instead of an uint8_t array
+
+uint32_t Manchester::encodeMessage(uint8_t id, uint16_t data)
 {
+  // generate simple checksum using id+data
   uint8_t chsum = (id ^ (uint8_t)(data >> 8) ^ (uint8_t)(data & 0b11111111) ^ 0b11101101);
 
-  // TODO for Particle devices, we can use a 32-bit unsigned int to store the 4 bytes of data instead?
-  uint8_t *byteArray = new uint8_t[4];
+  // use a 32-bit unsigned int to store the 4 bytes of data
+  uint32_t res = (id << 24) | (chsum << 16) | data;
+
+  /*uint8_t *byteArray = new uint8_t[4];
   byteArray[0] = id;
   byteArray[1] = chsum;
   byteArray[2] = (uint8_t)(data >> 8);
-  byteArray[3] = (uint8_t)(data & 0b11111111);
+  byteArray[3] = (uint8_t)(data & 0b11111111);*/
 
-  return byteArray;
+  return res;
 }
 
 

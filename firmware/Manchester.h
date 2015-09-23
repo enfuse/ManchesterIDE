@@ -125,7 +125,7 @@ class Manchester
     // uint8_t decodeMessage(uint16_t m, uint8_t &id, uint8_t &data); //decode 8 bit payload and 4 bit ID from the message, return 1 of checksum is correct, otherwise 0
     boolean decodeMessage(uint8_t* arr, uint8_t &id, uint16_t &data); //updated: decode 16 bit payload and 8 bit ID from the message, return true if checksum is correct, otherwise false
     // uint16_t encodeMessage(uint8_t id, uint8_t data); //encode 8 bit payload, 4 bit ID and 4 bit checksum into 16 bit
-    uint8_t* encodeMessage(uint8_t id, uint16_t data); //updated: encodes 16 bit payload, 8 bit ID and 8 bit checksum, total of 32 bits (4 bytes)
+    uint32_t encodeMessage(uint8_t id, uint16_t data); //updated: encodes 16 bit payload, 8 bit ID and 8 bit checksum, total of 32 bits (4 bytes)
 
     //wrappers for global functions
     void beginReceive(void);
